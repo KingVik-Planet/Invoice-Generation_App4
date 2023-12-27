@@ -38,7 +38,6 @@ for filepath in filepaths:
     pdf.cell(w=30, h=8, txt=columns[4], border=1, ln=1)
 
 #Adding Row
-
     for index, row in df.iterrows():
         pdf.set_font(family="Times", size=18)
         pdf.set_text_color(r=100, g=100, b=100)
