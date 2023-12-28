@@ -12,7 +12,8 @@ for filepath in filepaths:
     pdf.add_page()
 
     # Set image as background
-    pdf.image("image/img.png", x=80, y=120, w=50, h=70)
+    pdf.image("image/MWB.png", x=75, y=100, w=70, h=90)
+
 
     filename = Path(filepath).stem
     invoice_nr, date = filename.split("-")
@@ -25,6 +26,11 @@ for filepath in filepaths:
 
     pdf.set_font(family="Times", size=18, style="B")
     pdf.cell(w=50, h=8, txt=f"Date: {date}", ln = 1)
+
+    # Add caption under the image
+    pdf.set_font(family="Times", size=30)
+    pdf.set_text_color(r=55, g=25, b=25)
+    pdf.text(x=55, y=200, txt="Mentors Without Borders")
 
 
     df = pd.read_excel(filepath, sheet_name="Sheet 1")
@@ -65,7 +71,7 @@ for filepath in filepaths:
     pdf.cell(w=30, h=8, txt=f"The Total Price is ${total_sum}")
 
 #Adding Logo to the Top Right of the Invoice
-    pdf.image("image/img.png", x=190, y=2, w=20, h=20)
+    pdf.image("image/MWB.png", x=190, y=2, w=20, h=20)
 
     # Outputing the files
     pdf.output(f"Outputs/{filename}.pdf")
