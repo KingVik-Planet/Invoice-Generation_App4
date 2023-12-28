@@ -11,6 +11,9 @@ for filepath in filepaths:
     pdf = FPDF(orientation="P", unit="mm", format="A4")
     pdf.add_page()
 
+    # Set image as background
+    pdf.image("image/img.png", x=80, y=120, w=50, h=70)
+
     filename = Path(filepath).stem
     invoice_nr, date = filename.split("-")
     Date = filename.split("-")[0]
@@ -47,7 +50,22 @@ for filepath in filepaths:
         pdf.cell(w=30, h=8, txt=str(row["price_per_unit"]), border=1)
         pdf.cell(w=30, h=8, txt=str(row["total_price"]), border= 1, ln =1)
 
+#Calculating The total Bill
+    total_sum = df["total_price"].sum()
+    pdf.set_font(family="Times", size=18)
+    pdf.set_text_color(r=100, g=100, b=100)
+    pdf.cell(w=30, h=8, txt="", border=1)
+    pdf.cell(w=70, h=8, txt="", border=1)
+    pdf.cell(w=30, h=8, txt="", border= 1)
+    pdf.cell(w=30, h=8, txt="", border=1)
+    pdf.cell(w=30, h=8, txt=str(total_sum), border= 1, ln =1)
 
+#The total Bill
+    pdf.set_font(family="Times", size=14, style= "BI")
+    pdf.cell(w=30, h=8, txt=f"The Total Price is ${total_sum}")
+
+#Adding Logo to the Top Right of the Invoice
+    pdf.image("image/img.png", x=190, y=2, w=20, h=20)
 
     # Outputing the files
     pdf.output(f"Outputs/{filename}.pdf")
