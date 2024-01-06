@@ -74,7 +74,7 @@ for filepath in filepaths:
 #Adding Logo to the Top Right of the Invoice
     pdf.image("image/MWB.png", x=190, y=2, w=20, h=20)
 
-    # Outputing the files
+    # Outputting the files
     pdf.output(f"Outputs/{filename}.pdf")
 
 
